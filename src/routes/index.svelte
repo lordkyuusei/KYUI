@@ -8,6 +8,7 @@
 </script>
 
 <div class="show-components">
+	<h1>Buttons</h1>
 	<div class="components-buttons">
 		{#each buttonSchemes as scheme}
 			<Button {scheme}>{scheme}</Button>
@@ -15,6 +16,7 @@
 		{#each buttonTypes as type}
 			<Button {type} href={'#'}>📧</Button>
 		{/each}
+		<Button scheme={'primary'} icon={'🔎'}>Rechercher</Button>
 	</div>
 </div>
 
@@ -26,5 +28,6 @@
 		justify-content: center;
 		align-items: center;
 		margin: 1rem 0;
+		width: 50%;
 	}
 </style>
