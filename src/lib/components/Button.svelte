@@ -1,85 +1,140 @@
 <script lang="ts">
-	import type { Scheme } from '$lib/store/Types';
-	export let type: string = 'normal';
+	import type { Scheme, Shape } from '$lib/store/Types';
 	export let scheme: Scheme = 'primary';
+	export let shape: Shape = 'squircle';
 	export let href: string = '#';
-	export let disabled: boolean = false;
 	export let icon: string = '';
+
+	export let loading: boolean = null;
+	export let disabled: boolean = false;
 </script>
 
-<button class="button-{scheme} type-{type} {icon !== '' ? 'icon' : ''}" {disabled}>
-	{#if type === 'link'}
+<button
+	class="button-{scheme} type-{shape} {icon !== '' ? 'icon' : ''} {loading !== null
+		? `is-${loading ? 'loading' : 'loaded'}`
+		: ''}"
+	{disabled}
+	on:click
+>
+	{#if shape === 'link'}
 		<a {href}><slot /></a>
+	{:else if icon !== ''}
+		<span class="has-icon">
+			{icon}
+		</span>
+		<slot />
 	{:else}
-		{#if icon !== ''}
-			<span class="has-icon">
-				{icon}
-			</span>
-		{/if}
 		<slot />
 	{/if}
 </button>
 
 <style>
 	button {
-		box-sizing: content-box;
-		font-family: 'Segoe UI', 'Cascadia Code', 'Helvetica', 'Arial', sans-serif;
-		font-size: 1rem;
-		font-weight: 600;
-		border-radius: 10px;
-		border: 3px solid rgba(255, 255, 255, 0.3);
-		min-width: 8rem;
-		width: fit-content;
-		-moz-width: fit-content;
-		padding: 0.5rem;
+		border: 0px;
+
+		height: 2rem;
+		min-width: 6rem;
+
 		margin: 0.25rem;
-		text-transform: uppercase;
+		padding: 0 0.5rem;
+
 		transition: all 0.1s ease-in-out;
-		letter-spacing: 1px;
-		box-shadow: #000 0px 0px 1px;
-		-webkit-font-smoothing: antialiased;
 	}
 
 	button:hover {
 		cursor: pointer;
-		filter: brightness(110%);
 	}
 
-	button:active {
-		cursor: pointer;
-		filter: brightness(80%);
+	[class^='button-'] {
+		border-width: 0.1rem;
+		border-style: solid;
 	}
 
-	[class*=' icon'],
-	[class^='button-']:not([class*='primary']):not([class*='secondary']) {
+	[class^='button-']:not([class^='button-primary']):not([class^='button-secondary']) {
 		display: grid;
 		grid-template-columns: 1fr 3fr;
 		grid-template-rows: 100%;
-		align-items: flex-end;
+		grid-gap: 0.1rem;
+		justify-content: center;
+		align-items: center;
+		line-height: 0;
 	}
 
-	.has-icon {
-		grid-column: 1;
+	[class^='button-']:not([class^='button-primary']):not([class^='button-secondary'])::before {
+		text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
 	}
 
-	[class^='button-']::before {
-		text-shadow: 0 0 1px #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000, 0 0 0 #000;
-		-webkit-font-smoothing: antialiased;
+	[class^='button-']:not(.type-link):hover {
+		color: var(--text-light);
+	}
+
+	[class^='button-']:not(.type-link).is-loading::before {
+		content: '🌀';
+		animation: is-loading 1s linear infinite;
+	}
+
+	@keyframes is-loading {
+		0% {
+			transform: rotate(360deg);
+		}
+		100% {
+			transform: rotate(0deg);
+		}
+	}
+
+	[class^='button-']:active {
+		transform: scale(0.95);
 	}
 
 	.button-primary {
-		color: var(--text-light);
-		background-color: var(--primary);
+		border-color: var(--primary);
+	}
+
+	.button-primary:hover {
+		border-color: hsl(
+			var(--primary-h),
+			var(--primary-s),
+			calc(var(--primary-l) + var(--brightness))
+		);
+		background-color: hsl(
+			var(--primary-h),
+			var(--primary-s),
+			calc(var(--primary-l) - var(--brightness) * 1)
+		);
 	}
 
 	.button-secondary {
-		color: var(--text-light);
-		background-color: var(--secondary);
+		border-color: var(--secondary);
+	}
+
+	.button-secondary:hover {
+		border-color: hsl(
+			var(--secondary-h),
+			var(--secondary-s),
+			calc(var(--secondary-l) + var(--brightness))
+		);
+		background-color: hsl(
+			var(--secondary-h),
+			var(--secondary-s),
+			calc(var(--secondary-l) - var(--brightness) * 1)
+		);
 	}
 
 	.button-success {
-		color: var(--text-light);
-		background-color: var(--success);
+		border-color: var(--success);
+	}
+
+	.button-success:hover {
+		border-color: hsl(
+			var(--success-h),
+			var(--success-s),
+			calc(var(--success-l) + var(--brightness))
+		);
+		background-color: hsl(
+			var(--success-h),
+			var(--success-s),
+			calc(var(--success-l) - var(--brightness) * 0.5)
+		);
 	}
 
 	.button-success::before {
@@ -87,50 +142,79 @@
 	}
 
 	.button-danger {
-		color: var(--text-light);
-		background-color: var(--danger);
+		border-color: var(--danger);
 	}
+
+	.button-danger:hover {
+		border-color: hsl(var(--danger-h), var(--danger-s), calc(var(--danger-l) + var(--brightness)));
+		background-color: hsl(
+			var(--danger-h),
+			var(--danger-s),
+			calc(var(--danger-l) - var(--brightness) * 1)
+		);
+	}
+
 	.button-danger::before {
-		content: '❌';
+		content: '⛔';
 	}
 
 	.button-warning {
-		color: var(--text-dark);
-		background-color: var(--warning);
+		border-color: var(--warning);
 	}
+
+	.button-warning:hover {
+		border-color: hsl(
+			var(--warning-h),
+			var(--warning-s),
+			calc(var(--warning-l) + var(--brightness))
+		);
+		background-color: hsl(
+			var(--warning-h),
+			var(--warning-s),
+			calc(var(--warning-l) - var(--brightness) * 1)
+		);
+	}
+
 	.button-warning::before {
 		content: '⚠️';
 	}
 
 	.button-info {
-		color: var(--text-dark);
-		background-color: var(--info);
+		border-color: var(--info);
 	}
+
+	.button-info:hover {
+		border-color: hsl(var(--info-h), var(--info-s), calc(var(--info-l) + var(--brightness)));
+		background-color: hsl(
+			var(--info-h),
+			var(--info-s),
+			calc(var(--info-l) - var(--brightness) * 1)
+		);
+	}
+
 	.button-info::before {
 		content: 'ℹ️';
 	}
 
-	.type-round {
-		min-width: unset;
-		border-radius: 50px;
-		height: 1.5rem;
-		width: 1.5rem;
-		display: grid;
-		grid-template-columns: 1fr;
-		align-items: center;
-
-		letter-spacing: unset;
-	}
-
-	.type-round::first-letter {
-		font-size: medium;
+	.type-circle {
+		border-radius: var(--radius-circle);
+		min-width: 2rem;
 	}
 
 	.type-link {
 		border: none;
-		box-shadow: none;
-		background-color: unset;
-		min-width: unset;
-		text-decoration: solid underline;
+		text-underline-offset: 0.2rem;
+	}
+
+	.type-squircle {
+		border-radius: var(--radius-squircle);
+	}
+
+	.type-ellipse {
+		border-radius: var(--radius-circle);
+	}
+
+	.type-rectangle {
+		border-radius: var(--radius-rectangle);
 	}
 </style>
