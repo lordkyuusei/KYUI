@@ -23,7 +23,7 @@
 	]);
 
 	const defaultOptions = ['Pistache', 'Noix de pécan', 'Citron vert', 'Oréo', 'Crème brulée'];
-	const options: Option[] = defaultOptions.map((label, index) => ({
+	const options: Option[] = defaultOptions.map((label) => ({
 		label,
 		value: label.toLocaleLowerCase().replace(' ', '_')
 	}));
