@@ -2,8 +2,9 @@
 	import Button from '$lib/components/Button.svelte';
 	import Switch from '$lib/components/Switch.svelte';
 	import Select from '$lib/components/Select.svelte';
-	import type { Scheme, Shape, Option } from '$lib/store/Types';
+	import type { Scheme, Shape, Shade, Option } from '$lib/store/Types';
 	import SelectMenu from '$lib/components/SelectMenu.svelte';
+	import Loading from '$lib/components/Loading.svelte';
 
 	const buttonSchemes: Map<Scheme, string> = new Map<Scheme, string>([
 		['primary', 'Envoyer'],
@@ -20,6 +21,14 @@
 		['circle', '🔵'],
 		['rectangle', 'Rectangle'],
 		['ellipse', 'Elipse']
+	]);
+
+	const loadingTypes: Map<Shade, string> = new Map<Shade, string>([
+		['bar', 'Barre'],
+		['dot', 'Point'],
+		['round', 'Rond'],
+		['squid', 'Etalé'],
+		['circle', 'Cercles']
 	]);
 
 	const defaultOptions = ['Pistache', 'Noix de pécan', 'Citron vert', 'Oréo', 'Crème brulée'];
@@ -89,16 +98,30 @@
 			</div>
 		</div>
 	</div>
+	<div class="components-loading">
+		<h1>Loading</h1>
+		<div class="loadings">
+			{#each [...loadingTypes] as shade}
+				<div class="loading">
+					<h3>{shade[1]}</h3>
+					<Loading shade={shade[0]} />
+				</div>
+			{/each}
+		</div>
+	</div>
 </div>
 
 <style>
 	.show-components {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: space-between;
 		align-items: flex-start;
+		flex-wrap: wrap;
+		width: 100%;
 	}
 
 	[class^='components-'] {
+		width: auto;
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
