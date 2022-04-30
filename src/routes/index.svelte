@@ -28,7 +28,8 @@
 		['dot', 'Point'],
 		['round', 'Rond'],
 		['squid', 'Etalé'],
-		['circle', 'Cercles']
+		['circle', 'Cercles'],
+		['spread', 'Eparpillé']
 	]);
 
 	const defaultOptions = ['Pistache', 'Noix de pécan', 'Citron vert', 'Oréo', 'Crème brulée'];

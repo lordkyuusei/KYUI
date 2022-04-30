@@ -11,8 +11,6 @@
 </div>
 
 <style>
-	* {
-	}
 	.loading {
 		width: 4rem;
 		height: 4rem;
@@ -23,6 +21,14 @@
 	.squid {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
+	}
+
+	.spread {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr;
+		justify-content: flex-start;
 		align-items: center;
 	}
 
@@ -52,6 +58,13 @@
 
 	.loading-squid {
 		animation: loading-squid 1s ease-in-out infinite;
+	}
+
+	.loading-round {
+		grid-column: 2;
+		grid-row: 1;
+		animation: loading-round 1.2s ease-in-out infinite;
+		transform-origin: 0 2rem;
 	}
 
 	.loading-circle {
@@ -84,11 +97,10 @@
 		height: 0.5rem;
 	}
 
-	.loading-round {
-		grid-column: 2;
+	.loading-spread {
+		grid-column: 1;
 		grid-row: 1;
-		animation: loading-round 1.5s ease-in-out infinite;
-		transform-origin: 0 2rem;
+		animation: loading-spread 1.5s linear infinite;
 	}
 
 	[class^='loading-']:nth-child(2) {
@@ -107,24 +119,26 @@
 		height: 1rem;
 		width: 1rem;
 		z-index: 4;
-		background-color: var(--primary);
-		border: 0.5rem solid white;
-		border-radius: 1rem;
-		animation-duration: 0.8s;
+		animation-duration: 0.7s;
 	}
 
 	.loading-circle:nth-child(1)::before,
 	.loading-circle:nth-child(1)::after {
-		top: 20%;
-		right: 20%;
-		background-color: white;
+		top: -4px;
+	}
+
+	.loading-circle:nth-child(1)::before {
+		left: -5px;
+	}
+	.loading-circle:nth-child(1)::after {
+		right: -5px;
 	}
 
 	.loading-circle:nth-child(2) {
 		height: 2rem;
 		width: 2rem;
 		z-index: 3;
-		animation-duration: 0.9s;
+		animation-duration: 0.8s;
 	}
 
 	.loading-circle:nth-child(2)::before,
@@ -144,7 +158,7 @@
 		height: 3rem;
 		width: 3rem;
 		z-index: 2;
-		animation-duration: 1s;
+		animation-duration: 0.9s;
 	}
 
 	.loading-circle:nth-child(3)::before,
@@ -162,7 +176,7 @@
 	.loading-circle:nth-child(4) {
 		height: 4rem;
 		width: 4rem;
-		animation-duration: 1.1s;
+		animation-duration: 1s;
 	}
 
 	.loading-circle:nth-child(4)::before,
@@ -175,6 +189,22 @@
 
 	.loading-circle:nth-child(4)::after {
 		right: 2px;
+	}
+
+	.loading-spread:nth-child(1) {
+		animation-delay: 0.3s;
+	}
+
+	.loading-spread:nth-child(2) {
+		animation-delay: 0.6s;
+	}
+
+	.loading-spread:nth-child(3) {
+		animation-delay: 0.9s;
+	}
+
+	.loading-spread:nth-child(4) {
+		animation-delay: 1.2s;
 	}
 
 	@keyframes loading-dot {
@@ -229,6 +259,29 @@
 		}
 		100% {
 			height: 0.5rem;
+		}
+	}
+
+	@keyframes loading-spread {
+		0% {
+			opacity: 0;
+			animation-timing-function: ease-in;
+		}
+		25% {
+			opacity: 0.5;
+		}
+		50% {
+			opacity: 1;
+			transform: translateX(2rem);
+			animation-timing-function: linear;
+		}
+		75% {
+			opacity: 0.5;
+		}
+		100% {
+			opacity: 0;
+			transform: translateX(4rem);
+			animation-timing-function: ease-out;
 		}
 	}
 </style>

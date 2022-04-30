@@ -6,7 +6,7 @@ export type Scheme = 'primary'
     | 'info';
 
 export type Shape = 'squircle' | 'rectangle' | 'ellipse' | 'circle' | 'link';
-export type Shade = 'dot' | 'bar' | 'round' | 'squid' | 'circle';
+export type Shade = 'dot' | 'bar' | 'round' | 'squid' | 'circle' | 'spread';
 export type SwitchStyle = 'inward' | 'outward';
 export type Direction = 'horizontal' | 'vertical';
 
