@@ -5,6 +5,7 @@
 	import type { Scheme, Shape, Shade, Option } from '$lib/store/Types';
 	import SelectMenu from '$lib/components/SelectMenu.svelte';
 	import Loading from '$lib/components/Loading.svelte';
+	import Toast from '$lib/components/Toast.svelte';
 
 	const buttonSchemes: Map<Scheme, string> = new Map<Scheme, string>([
 		['primary', 'Envoyer'],
@@ -30,6 +31,15 @@
 		['squid', 'Etalé'],
 		['circle', 'Cercles'],
 		['spread', 'Eparpillé']
+	]);
+
+	const toastTypes: Map<Scheme, string> = new Map<Scheme, string>([
+		['primary', 'Notification envoyée 1'],
+		['secondary', 'Notification envoyée 2'],
+		['success', 'Le formulaire a été validé'],
+		['danger', 'La ressource a été supprimée.'],
+		['warning', 'La ressource a été envoyée, mais aucune nouvelle depuis.'],
+		['info', 'Un nouveau contrat est disponible.']
 	]);
 
 	const defaultOptions = ['Pistache', 'Noix de pécan', 'Citron vert', 'Oréo', 'Crème brulée'];
@@ -110,6 +120,14 @@
 			{/each}
 		</div>
 	</div>
+	<div class="components-toast">
+		<h1>Toasts</h1>
+		<div class="toasts">
+			{#each [...toastTypes] as toast, index}
+				<Toast mode={index === 0 ? 'absolute' : 'relative'} scheme={toast[0]}>{toast[1]}</Toast>
+			{/each}
+		</div>
+	</div>
 </div>
 
 <style>
@@ -131,6 +149,10 @@
 		margin: 1rem 0;
 	}
 
+	.components-loading {
+		width: 100%;
+	}
+
 	.switches {
 		display: flex;
 		flex-direction: column;
@@ -138,5 +160,12 @@
 		align-items: flex-start;
 		align-content: space-between;
 		gap: 0.5rem;
+	}
+
+	.loadings {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
 	}
 </style>

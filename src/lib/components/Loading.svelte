@@ -3,7 +3,7 @@
 	export let shade = 'bar';
 </script>
 
-<div class="loading {shade}">
+<div class="loading {shade}" class:fullscreen>
 	<div class="loading-{shade}" />
 	<div class="loading-{shade}" />
 	<div class="loading-{shade}" />
@@ -28,7 +28,7 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: 1fr;
-		justify-content: flex-start;
+		justify-items: flex-start;
 		align-items: center;
 	}
 
@@ -39,6 +39,16 @@
 		grid-template-rows: 100%;
 		align-items: center;
 		justify-items: center;
+	}
+
+	.loading.fullscreen {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(255, 255, 255, 0.8);
 	}
 
 	[class^='loading-']:not(.loading-circle) {
@@ -119,7 +129,6 @@
 		height: 1rem;
 		width: 1rem;
 		z-index: 4;
-		animation-duration: 0.7s;
 	}
 
 	.loading-circle:nth-child(1)::before,
@@ -138,7 +147,6 @@
 		height: 2rem;
 		width: 2rem;
 		z-index: 3;
-		animation-duration: 0.8s;
 	}
 
 	.loading-circle:nth-child(2)::before,
@@ -158,7 +166,6 @@
 		height: 3rem;
 		width: 3rem;
 		z-index: 2;
-		animation-duration: 0.9s;
 	}
 
 	.loading-circle:nth-child(3)::before,
@@ -176,7 +183,6 @@
 	.loading-circle:nth-child(4) {
 		height: 4rem;
 		width: 4rem;
-		animation-duration: 1s;
 	}
 
 	.loading-circle:nth-child(4)::before,

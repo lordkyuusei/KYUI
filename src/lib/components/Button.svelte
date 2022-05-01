@@ -199,6 +199,7 @@
 	.type-circle {
 		border-radius: var(--radius-circle);
 		min-width: 2rem;
+		padding: 0;
 	}
 
 	.type-link {
