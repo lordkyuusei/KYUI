@@ -47,6 +47,7 @@
 	}
 
 	.ktoast-absolute {
+		z-index: 2;
 		position: fixed;
 		bottom: 0.25rem;
 		right: 0.25rem;
