@@ -10,6 +10,7 @@ const config = {
 			trailingSlash: 'always',
 		}),
 		trailingSlash: 'always',
+		prerender: { default: true, entries: [] },
 		paths: {
 			base: process.env.NODE_ENV === 'development' ? '' : '/KYUI'
 		}
