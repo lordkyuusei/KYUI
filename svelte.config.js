@@ -6,11 +6,9 @@ const config = {
 	kit: {
 		adapter: adapter({
 			pages: "docs",
-			assets: "docs"
+			assets: "docs",
+			trailingSlash: 'always',
 		}),
-		prerender: {
-			default: true,
-		},
 		trailingSlash: 'always',
 		paths: {
 			base: process.env.NODE_ENV === 'development' ? '' : '/KYUI'
