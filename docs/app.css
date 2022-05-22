@@ -1,0 +1,69 @@
+:root {
+    /* Colors */
+    --primary-h: 245;
+    --primary-s: 91%;
+    --primary-l: 74%;
+    --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+
+    --secondary-h: 201;
+    --secondary-s: 85%;
+    --secondary-l: 31%;
+    --secondary: hsl(var(--secondary-h), var(--secondary-s), var(--secondary-l));
+
+    --success-h: 150;
+    --success-s: 100%;
+    --success-l: 41%;
+    --success: hsl(var(--success-h), var(--success-s), var(--success-l));
+
+    --danger-h: 1;
+    --danger-s: 93%;
+    --danger-l: 58%;
+    --danger: hsl(var(--danger-h), var(--danger-s), var(--danger-l));
+
+    --warning-h: 37;
+    --warning-s: 100%;
+    --warning-l: 59%;
+    --warning: hsl(var(--warning-h), var(--warning-s), var(--warning-l));
+
+    --info-h: 223;
+    --info-s: 15%;
+    --info-l: 24%;
+    --info: hsl(var(--info-h), var(--info-s), var(--info-l));
+
+    --text-light: #f8f9fa;
+    --text-dark: #343a40;
+
+    --brightness: 10%;
+
+    --radius-circle: 1rem;
+    --radius-squircle: 0.75rem;
+    --radius-rectangle: 0;
+}
+
+html {
+    font-family: 'Cascadia Code', Helvetica, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    width: 0.45rem;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--secondary);
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
