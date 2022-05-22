@@ -11,7 +11,10 @@ const config = {
 		prerender: {
 			default: true,
 		},
-		trailingSlash: 'always'
+		trailingSlash: 'always',
+		paths: {
+			base: process.env.NODE_ENV === 'development' ? '' : '/KYUI'
+		}
 	},
 	preprocess: sveltePreprocess(),
 };
